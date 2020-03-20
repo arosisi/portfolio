@@ -1,25 +1,14 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import Toolbar from "@material-ui/core/Toolbar";
+import { Route, Switch } from "react-router-dom";
+import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 
-import About from "./components/About/About";
+import About from "./components/About";
 import Contact from "./components/Contact";
-import Portfolio from "./components/Portfolio";
+import NavBar from "./components/NavBar";
+import Projects from "./components/Projects";
 
 const styles = {
-  appBar: {
-    boxShadow: "none"
-  },
-  name: {
-    fontSize: 40,
-    fontWeight: "bold"
-  },
-  tabs: {
-    margin: "0 auto"
-  },
   content: {
     marginTop: 50,
     padding: "0 40px",
@@ -29,38 +18,28 @@ const styles = {
 };
 
 class App extends React.Component {
-  state = { value: "about" };
-
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
+    const page = window.location.pathname.slice(1);
     return (
       <div>
-        <AppBar
-          className={classes.appBar}
-          color='transparent'
-          position='relative'
-        >
-          <Toolbar>
-            <Tabs
-              className={classes.tabs}
-              value={value}
-              onChange={(event, value) => this.setState({ value })}
-            >
-              <Tab label='About' value='about' />
-              <Tab label='Portfolio' value='portfolio' />
-              <Tab label='Contact' value='contact' />
-            </Tabs>
-          </Toolbar>
-        </AppBar>
+        <NavBar
+          page={page}
+          onChange={(event, page) => {
+            this.setState({ page });
+            this.props.history.push(`/${page}`);
+          }}
+        />
         <div className={classes.content}>
-          {value === "about" && <About />}
-          {value === "portfolio" && <Portfolio />}
-          {value === "contact" && <Contact />}
+          <Switch>
+            <Route exact path='/' component={About} />
+            <Route path='/projects' component={Projects} />
+            <Route path='/contact' component={Contact} />
+          </Switch>
         </div>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(App);
+export default withRouter(withStyles(styles)(App));

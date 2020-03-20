@@ -23,7 +23,7 @@ const styles = {
   }
 };
 
-class Portfolio extends React.Component {
+class Projects extends React.Component {
   renderProject = ({ href, src, project, description }) => {
     const { classes } = this.props;
     return (
@@ -74,4 +74,4 @@ class Portfolio extends React.Component {
   }
 }
 
-export default withStyles(styles)(Portfolio);
+export default withStyles(styles)(Projects);

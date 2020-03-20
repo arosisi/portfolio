@@ -11,7 +11,7 @@ class Skills extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
+      <div>
         <h2>Skills</h2>
         <h4 className={classes.category}>Languages & Frameworks</h4>
         JavaScript, Java, React, Angular, Node.js, Express.js
