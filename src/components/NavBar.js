@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router";
 import AppBar from "@material-ui/core/AppBar";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
@@ -16,7 +17,8 @@ const styles = {
 
 class NarBar extends React.Component {
   render() {
-    const { classes, page, onChange } = this.props;
+    const { classes, history } = this.props;
+    const page = history.location.pathname.slice(1);
     return (
       <AppBar
         className={classes.appBar}
@@ -24,7 +26,13 @@ class NarBar extends React.Component {
         position='relative'
       >
         <Toolbar>
-          <Tabs className={classes.tabs} value={page} onChange={onChange}>
+          <Tabs
+            className={classes.tabs}
+            value={page}
+            onChange={(event, page) => {
+              history.push(`${page}`);
+            }}
+          >
             <Tab label='About' value='' />
             <Tab label='Projects' value='projects' />
             <Tab label='Contact' value='contact' />
@@ -35,4 +43,4 @@ class NarBar extends React.Component {
   }
 }
 
-export default withStyles(styles)(NarBar);
+export default withRouter(withStyles(styles)(NarBar));

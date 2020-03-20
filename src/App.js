@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 
 import About from "./components/About";
@@ -20,16 +19,9 @@ const styles = {
 class App extends React.Component {
   render() {
     const { classes } = this.props;
-    const page = window.location.pathname.slice(1);
     return (
       <div>
-        <NavBar
-          page={page}
-          onChange={(event, page) => {
-            this.setState({ page });
-            this.props.history.push(`/${page}`);
-          }}
-        />
+        <NavBar />
         <div className={classes.content}>
           <Switch>
             <Route exact path='/' component={About} />
@@ -42,4 +34,4 @@ class App extends React.Component {
   }
 }
 
-export default withRouter(withStyles(styles)(App));
+export default withStyles(styles)(App);
