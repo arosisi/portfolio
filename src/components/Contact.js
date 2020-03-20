@@ -1,29 +1,41 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
-  root: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
   inputs: {
+    display: "flex",
+    flexDirection: "column",
     "& > *": {
+      width: 350,
       marginBottom: 20
     }
   },
-  button: {
-    float: "right"
+  submit: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "end"
+  },
+  error: {
+    color: "#f44336"
   }
 };
 
 class Contact extends React.Component {
-  state = { nameError: false, emailError: false, messageError: false };
+  state = {
+    nameError: false,
+    emailError: false,
+    messageError: false,
+    submitting: false,
+    status: ""
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-    const data = new FormData(event.target);
+    const form = event.target;
+    const data = new FormData(form);
     const name = data.get("name");
     const email = data.get("email");
     const message = data.get("message");
@@ -33,62 +45,94 @@ class Contact extends React.Component {
     if (nameError || emailError || messageError) {
       this.setState({ nameError, emailError, messageError });
     } else {
-      // TODO
+      this.setState({ submitting: true }, () => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(form.method, form.action);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState !== XMLHttpRequest.DONE) return;
+          if (xhr.status === 200) {
+            form.reset();
+            this.setState({ submitting: false, status: "SUCCESS" });
+          } else {
+            this.setState({ submitting: false, status: "ERROR" });
+          }
+        };
+        xhr.send(data);
+      });
     }
   };
 
   render() {
     const { classes } = this.props;
-    const { nameError, emailError, messageError } = this.state;
+    const {
+      nameError,
+      emailError,
+      messageError,
+      submitting,
+      status
+    } = this.state;
     return (
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete='off'
-        onSubmit={this.handleSubmit}
-      >
-        <div className={classes.inputs}>
-          <TextField
-            fullWidth
-            InputLabelProps={{
-              shrink: true
-            }}
-            name='name'
-            label='Name'
-            autoFocus
-            error={nameError}
-            helperText={nameError ? "Name cannot be blank" : ""}
-            onChange={() => this.setState({ nameError: false })}
-          />
-          <TextField
-            fullWidth
-            InputLabelProps={{
-              shrink: true
-            }}
-            name='email'
-            label='Email'
-            error={emailError}
-            helperText={emailError ? "Invalid email format" : ""}
-            onChange={() => this.setState({ emailError: false })}
-          />
-          <TextField
-            fullWidth
-            multiline
-            rows={4}
-            InputLabelProps={{
-              shrink: true
-            }}
-            name='message'
-            label='Message'
-            error={messageError}
-            helperText={messageError ? "Message cannot be blank" : ""}
-            onChange={() => this.setState({ messageError: false })}
-          />
-          <Button type='submit' className={classes.button}>
-            Submit
-          </Button>
-        </div>
-      </form>
+      <div>
+        <form
+          noValidate
+          autoComplete='off'
+          onSubmit={this.handleSubmit}
+          action='https://formspree.io/moqlndod'
+          method='POST'
+        >
+          <div className={classes.inputs}>
+            <TextField
+              InputLabelProps={{
+                shrink: true
+              }}
+              name='name'
+              label='Name'
+              autoFocus
+              error={nameError}
+              helperText={nameError ? "Name cannot be blank" : ""}
+              onChange={() => this.setState({ nameError: false, status: "" })}
+            />
+            <TextField
+              InputLabelProps={{
+                shrink: true
+              }}
+              name='email'
+              label='Email'
+              error={emailError}
+              helperText={emailError ? "Invalid email format" : ""}
+              onChange={() => this.setState({ emailError: false, status: "" })}
+            />
+            <TextField
+              multiline
+              rows={4}
+              InputLabelProps={{
+                shrink: true
+              }}
+              name='message'
+              label='Message'
+              error={messageError}
+              helperText={messageError ? "Message cannot be blank" : ""}
+              onChange={() =>
+                this.setState({ messageError: false, status: "" })
+              }
+            />
+          </div>
+
+          <div className={classes.submit}>
+            {status === "SUCCESS" ? (
+              <p>Submitted!</p>
+            ) : submitting ? (
+              <CircularProgress />
+            ) : (
+              <Button type='submit'>Submit</Button>
+            )}
+            {status === "ERROR" && (
+              <p className={classes.error}>Ooops! There was an error.</p>
+            )}
+          </div>
+        </form>
+      </div>
     );
   }
 }
