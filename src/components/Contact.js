@@ -1,15 +1,18 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
+  root: {
+    maxWidth: 350
+  },
   inputs: {
     display: "flex",
-    flexDirection: "column",
+    flexWrap: "wrap",
     "& > *": {
-      width: 350,
       marginBottom: 20
     }
   },
@@ -73,7 +76,12 @@ class Contact extends React.Component {
       status
     } = this.state;
     return (
-      <div>
+      <div className={classes.root}>
+        <Helmet>
+          <title>Contact</title>
+          <meta name='description' content='Contact arosisi (Tom Nguyen)' />
+        </Helmet>
+
         <form
           noValidate
           autoComplete='off'
@@ -83,6 +91,7 @@ class Contact extends React.Component {
         >
           <div className={classes.inputs}>
             <TextField
+              fullWidth
               InputLabelProps={{
                 shrink: true
               }}
@@ -94,6 +103,7 @@ class Contact extends React.Component {
               onChange={() => this.setState({ nameError: false, status: "" })}
             />
             <TextField
+              fullWidth
               InputLabelProps={{
                 shrink: true
               }}
@@ -104,6 +114,7 @@ class Contact extends React.Component {
               onChange={() => this.setState({ emailError: false, status: "" })}
             />
             <TextField
+              fullWidth
               multiline
               rows={4}
               InputLabelProps={{

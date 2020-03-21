@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
@@ -51,19 +52,22 @@ class Projects extends React.Component {
   render() {
     return (
       <div>
+        <Helmet>
+          <title>Projects</title>
+          <meta name='description' content="arosisi (Tom Nguyen)'s projects" />
+        </Helmet>
+
         <Grid container spacing={3} justify='center'>
           {this.renderProject({
             href: "https://arosisi.github.io/tower-of-hanoi",
-            src:
-              "https://drive.google.com/uc?export=download&id=1E5_oVV4Gwaz98UP0KiiUPmYLQLKhIAy6",
+            src: `${process.env.PUBLIC_URL}/images/tower-of-hanoi.jpg`,
             project: "Tower of Hanoi",
             description:
               "A game where the player has to move a stack of disks from one column to another"
           })}
           {this.renderProject({
             href: "https://doc4you-app.firebaseapp.com",
-            src:
-              "https://drive.google.com/uc?export=download&id=1hDjQpD9ydNgqh3QTyWfH_z-4mAX8mCc8",
+            src: `${process.env.PUBLIC_URL}/images/doc4you.jpg`,
             project: "doc4you",
             description:
               "A platform where doctors can publish their availability for patients to book"

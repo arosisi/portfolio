@@ -53,7 +53,7 @@ class Intro extends React.Component {
       <div className={classes.root}>
         <img
           className={classes.picture}
-          src='https://drive.google.com/uc?export=download&id=1TptIirtRFmSifpECwqtDUAF0a5-pf2iG'
+          src='https://media-exp1.licdn.com/dms/image/C4D03AQGcXQeoGaaDtQ/profile-displayphoto-shrink_200_200/0?e=1590019200&v=beta&t=DQZgmiWV-srgA3HdgEq9BBAMI9j2xUihTXiJY26feUM'
           alt='Profile'
         />
         <div className={classes.content}>

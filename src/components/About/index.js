@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { withStyles } from "@material-ui/core/styles";
 
 import Education from "./Education";
@@ -19,6 +20,11 @@ class About extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
+        <Helmet>
+          <title>Portfolio</title>
+          <meta name='description' content="arosisi (Tom Nguyen)'s portfolio" />
+        </Helmet>
+
         <Intro />
         <Skills />
         <Experience />
