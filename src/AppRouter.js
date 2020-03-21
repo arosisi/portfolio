@@ -1,14 +1,14 @@
 import React from "react";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 
 class AppRouter extends React.Component {
   render() {
     return (
-      <HashRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
