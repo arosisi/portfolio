@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
+import { ReCaptcha, loadReCaptcha } from "react-recaptcha-google";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
@@ -16,27 +17,42 @@ const styles = {
       marginBottom: 20
     }
   },
+  captchaError: {
+    color: "#f44336",
+    fontSize: 12
+  },
   submit: {
     display: "flex",
     flexDirection: "column",
     alignItems: "end"
   },
-  error: {
+  submitError: {
     color: "#f44336"
   }
 };
 
 class Contact extends React.Component {
   state = {
+    captchaLoaded: false,
+    captchaVerified: false,
     nameError: false,
     emailError: false,
     messageError: false,
+    captchaError: false,
     submitting: false,
     status: ""
   };
 
+  componentDidMount() {
+    loadReCaptcha();
+  }
+
   handleSubmit = event => {
     event.preventDefault();
+
+    const { captchaLoaded, captchaVerified } = this.state;
+    let captchaError = !captchaLoaded || !captchaVerified;
+
     const form = event.target;
     const data = new FormData(form);
     const name = data.get("name");
@@ -45,8 +61,9 @@ class Contact extends React.Component {
     let nameError = !name;
     let emailError = !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email);
     let messageError = !message;
-    if (nameError || emailError || messageError) {
-      this.setState({ nameError, emailError, messageError });
+
+    if (nameError || emailError || messageError || captchaError) {
+      this.setState({ nameError, emailError, messageError, captchaError });
     } else {
       this.setState({ submitting: true }, () => {
         const xhr = new XMLHttpRequest();
@@ -72,6 +89,7 @@ class Contact extends React.Component {
       nameError,
       emailError,
       messageError,
+      captchaError,
       submitting,
       status
     } = this.state;
@@ -130,6 +148,21 @@ class Contact extends React.Component {
             />
           </div>
 
+          <ReCaptcha
+            render='explicit'
+            sitekey='6LcLYecUAAAAAJXiz98dtjhRbek8Nu96rOemOv7Y'
+            onloadCallback={() => this.setState({ captchaLoaded: true })}
+            verifyCallback={() =>
+              this.setState({ captchaVerified: true, captchaError: false })
+            }
+            expiredCallback={() => this.setState({ captchaVerified: false })}
+          />
+          {captchaError && (
+            <div className={classes.captchaError}>Captcha is required</div>
+          )}
+
+          <br />
+
           <div className={classes.submit}>
             {status === "SUCCESS" ? (
               <p>Submitted!</p>
@@ -139,7 +172,7 @@ class Contact extends React.Component {
               <Button type='submit'>Submit</Button>
             )}
             {status === "ERROR" && (
-              <p className={classes.error}>Ooops! There was an error.</p>
+              <p className={classes.submitError}>Ooops! There was an error.</p>
             )}
           </div>
         </form>
