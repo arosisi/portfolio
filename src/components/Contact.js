@@ -73,6 +73,7 @@ class Contact extends React.Component {
           if (xhr.readyState !== XMLHttpRequest.DONE) return;
           if (xhr.status === 200) {
             form.reset();
+            this.captcha.reset();
             this.setState({ submitting: false, status: "SUCCESS" });
           } else {
             this.setState({ submitting: false, status: "ERROR" });
@@ -149,6 +150,9 @@ class Contact extends React.Component {
           </div>
 
           <ReCaptcha
+            ref={element => {
+              this.captcha = element;
+            }}
             render='explicit'
             sitekey='6LcLYecUAAAAAJXiz98dtjhRbek8Nu96rOemOv7Y'
             onloadCallback={() => this.setState({ captchaLoaded: true })}
