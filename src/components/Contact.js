@@ -6,6 +6,8 @@ import TextField from "@material-ui/core/TextField";
 import { ReCaptcha, loadReCaptcha } from "react-recaptcha-google";
 import { withStyles } from "@material-ui/core/styles";
 
+import privateInfo from "../privateInfo";
+
 const styles = {
   root: {
     maxWidth: 350
@@ -105,7 +107,7 @@ class Contact extends React.Component {
           noValidate
           autoComplete='off'
           onSubmit={this.handleSubmit}
-          action='https://formspree.io/moqlndod'
+          action={privateInfo.form_endpoint}
           method='POST'
         >
           <div className={classes.inputs}>
@@ -154,7 +156,7 @@ class Contact extends React.Component {
               this.captcha = element;
             }}
             render='explicit'
-            sitekey='6LcLYecUAAAAAJXiz98dtjhRbek8Nu96rOemOv7Y'
+            sitekey={privateInfo.captcha_sitekey}
             onloadCallback={() => this.setState({ captchaLoaded: true })}
             verifyCallback={() =>
               this.setState({ captchaVerified: true, captchaError: false })

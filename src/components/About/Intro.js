@@ -5,17 +5,24 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
   root: {
-    display: "flex"
+    display: "flex",
+    flexWrap: "wrap"
   },
-  name: {
-    margin: 0
+  picture: {
+    width: 150,
+    minHeight: 150,
+    borderRadius: "50%",
+    marginRight: 40
   },
   content: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    height: 150,
-    marginLeft: 40
+    minHeight: 140,
+    marginTop: 10
+  },
+  name: {
+    margin: 0
   },
   links: {
     display: "flex",
@@ -24,11 +31,6 @@ const styles = {
   link: {
     marginRight: 10,
     color: "inherit"
-  },
-  picture: {
-    width: 150,
-    minHeight: 150,
-    borderRadius: "50%"
   }
 };
 
@@ -57,10 +59,10 @@ class Intro extends React.Component {
           alt='Profile'
         />
         <div className={classes.content}>
-          <h1 className={classes.name}>Tom Nguyen</h1>
+          <h2 className={classes.name}>Tom Nguyen</h2>
           <div>Web developer</div>
-          <div> Masters student in Computer Science</div>
-          <div> Based in Ottawa, Canada</div>
+          <div>Masters student in Computer Science</div>
+          <div>Based in Ottawa, Canada</div>
           <div className={classes.links}>
             {this.renderIcon({
               href: "https://github.com/arosisi",
