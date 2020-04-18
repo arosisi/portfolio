@@ -10,7 +10,7 @@ const styles = {
   },
   picture: {
     width: 150,
-    minHeight: 150,
+    height: 150,
     borderRadius: "50%",
     marginRight: 40
   },

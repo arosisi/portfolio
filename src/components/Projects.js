@@ -18,6 +18,11 @@ const styles = {
   card: {
     maxWidth: 345
   },
+  content: {
+    fontFamily:
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+    fontSize: 16
+  },
   title: {
     fontWeight: "bold",
     marginBottom: 10
@@ -28,7 +33,7 @@ class Projects extends React.Component {
   renderProject = ({ href, src, project, description }) => {
     const { classes } = this.props;
     return (
-      <Grid item xs={12} sm={6} md={4} className={classes.container}>
+      <Grid item xs={12} sm={6} className={classes.container}>
         <a
           href={href}
           target='_blank'
@@ -38,7 +43,7 @@ class Projects extends React.Component {
           <Card className={classes.card}>
             <CardActionArea>
               <CardMedia component='img' image={src} alt={project} />
-              <CardContent>
+              <CardContent className={classes.content}>
                 <div className={classes.title}>{project}</div>
                 <div>{description}</div>
               </CardContent>
