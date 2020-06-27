@@ -55,7 +55,7 @@ class Intro extends React.Component {
       <div className={classes.root}>
         <img
           className={classes.picture}
-          src='images/profile-picture.jpg'
+          src={`${process.env.PUBLIC_URL}/images/profile-picture.jpg`}
           alt='Profile'
         />
         <div className={classes.content}>

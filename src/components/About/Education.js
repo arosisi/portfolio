@@ -59,24 +59,21 @@ class Education extends React.Component {
         <h2>Education</h2>
         <div className={classes.education}>
           {this.renderEducation({
-            src:
-              "https://media-exp1.licdn.com/dms/image/C4E0BAQH8Hd0st7TvEg/company-logo_200_200/0?e=2159024400&v=beta&t=xVdZbgkj4jh87SPVN4zhYZce-P_hk7GsJvvW0HgZ6WU",
+            src: `${process.env.PUBLIC_URL}/images/Carleton.png`,
             href: "http://www.carleton.ca",
             university: "Carleton University",
             degree: "Master of Computer Science",
             time: "September 2018 - December 2020"
           })}
           {this.renderEducation({
-            src:
-              "https://media-exp1.licdn.com/dms/image/C4D0BAQFGzzcYtpkcnA/company-logo_200_200/0?e=2159024400&v=beta&t=D75FGSEkOCwrcxe6UNYrbVQvuuxW0PxzPYWZnyHNgM0",
+            src: `${process.env.PUBLIC_URL}/images/SUSS.png`,
             href: "http://www.suss.edu.sg",
             university: "Singapore University of Social Sciences",
             degree: "Bachelor of Science in Mathematics",
             time: "July 2014 - November 2017"
           })}
           {this.renderEducation({
-            src:
-              "https://media-exp1.licdn.com/dms/image/C4D0BAQG0nfM0ZH4emA/company-logo_200_200/0?e=2159024400&v=beta&t=md0Sym_ZNd-WwmfiZNEXONIJ70Iue97frCHLbr65KQA",
+            src: `${process.env.PUBLIC_URL}/images/NTU.png`,
             href: "http://www.ntu.edu.sg",
             university: "Nanyang Technological University",
             degree: "Bachelor of Arts (Honours) in Psychology",

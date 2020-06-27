@@ -59,16 +59,14 @@ class Experience extends React.Component {
         <h2>Experience</h2>
         <div className={classes.experience}>
           {this.renderExperience({
-            src:
-              "https://media-exp1.licdn.com/dms/image/C560BAQFdwVGpSOHmgw/company-logo_100_100/0?e=1592438400&v=beta&t=HjEppGo4bPRKXCyxD92_LuAV0p4VxWQ66NagSuoWsKM",
+            src: `${process.env.PUBLIC_URL}/images/Amazon.png`,
             href: "https://www.amazon.ca",
             company: "Amazon",
             title: "Software Development Engineer Intern",
             time: "June 2020 - August 2020, September 2019 - December 2019"
           })}
           {this.renderExperience({
-            src:
-              "https://media-exp1.licdn.com/dms/image/C4E0BAQEke4wbn6n-4w/company-logo_200_200/0?e=2159024400&v=beta&t=3yM7J2gkPuRPjSv6CUq4hkddRQF4gn8qOcE2tzutQ-o",
+            src: `${process.env.PUBLIC_URL}/images/TutorOcean.png`,
             href: "https://www.tutorocean.com",
             company: "TutorOcean",
             title: "Software Engineer (Co-op)",
