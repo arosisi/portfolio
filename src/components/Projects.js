@@ -33,7 +33,7 @@ class Projects extends React.Component {
   renderProject = ({ href, src, project, description }) => {
     const { classes } = this.props;
     return (
-      <Grid item xs={12} sm={6} className={classes.container}>
+      <Grid item xs={12} className={classes.container}>
         <a
           href={href}
           target='_blank'
@@ -62,20 +62,13 @@ class Projects extends React.Component {
           <meta name='description' content="arosisi (Tom Nguyen)'s projects" />
         </Helmet>
 
-        <Grid container spacing={3} justify='center'>
+        <Grid container spacing={3}>
           {this.renderProject({
             href: "https://arosisi.github.io/tower-of-hanoi",
             src: `${process.env.PUBLIC_URL}/images/tower-of-hanoi.jpg`,
             project: "Tower of Hanoi",
             description:
               "A game where the player has to move a stack of disks from one column to another"
-          })}
-          {this.renderProject({
-            href: "https://doc4you-app.firebaseapp.com",
-            src: `${process.env.PUBLIC_URL}/images/doc4you.jpg`,
-            project: "doc4you",
-            description:
-              "A platform where doctors can publish their availability for patients to book"
           })}
         </Grid>
       </div>
