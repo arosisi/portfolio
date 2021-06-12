@@ -22,7 +22,8 @@ const styles = {
     marginTop: 10
   },
   name: {
-    margin: 0
+    marginTop: 0,
+    marginBottom: 10
   },
   links: {
     display: "flex",
@@ -61,8 +62,7 @@ class Intro extends React.Component {
         <div className={classes.content}>
           <h2 className={classes.name}>Tom Nguyen</h2>
           <div>Web developer</div>
-          <div>Masters student in Computer Science</div>
-          <div>Based in Ottawa, Canada</div>
+          <div>Based in Vancouver, Canada</div>
           <div className={classes.links}>
             {this.renderIcon({
               href: "https://github.com/arosisi",

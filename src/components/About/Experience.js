@@ -62,6 +62,13 @@ class Experience extends React.Component {
             src: `${process.env.PUBLIC_URL}/images/Amazon.png`,
             href: "https://www.amazon.ca",
             company: "Amazon",
+            title: "Software Development Engineer I",
+            time: "Since March 2021"
+          })}
+          {this.renderExperience({
+            src: `${process.env.PUBLIC_URL}/images/Amazon.png`,
+            href: "https://www.amazon.ca",
+            company: "Amazon",
             title: "Software Development Engineer Intern",
             time: "June 2020 - August 2020, September 2019 - December 2019"
           })}
