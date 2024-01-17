@@ -1,46 +1,38 @@
-import React from "react";
-import { withRouter } from "react-router";
 import AppBar from "@material-ui/core/AppBar";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import Toolbar from "@material-ui/core/Toolbar";
-import { withStyles } from "@material-ui/core/styles";
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const styles = {
   appBar: {
-    boxShadow: "none"
+    boxShadow: "none",
   },
   tabs: {
-    margin: "0 auto"
-  }
+    margin: "0 auto",
+  },
 };
 
-class NarBar extends React.Component {
-  render() {
-    const { classes, history } = this.props;
-    const page = history.location.pathname.slice(1);
-    return (
-      <AppBar
-        className={classes.appBar}
-        color='transparent'
-        position='relative'
-      >
-        <Toolbar>
-          <Tabs
-            className={classes.tabs}
-            value={page}
-            onChange={(event, page) => {
-              history.push(`${page}`);
-            }}
-          >
-            <Tab label='About' value='' />
-            <Tab label='Projects' value='projects' />
-            <Tab label='Contact' value='contact' />
-          </Tabs>
-        </Toolbar>
-      </AppBar>
-    );
-  }
-}
+export default function NarBar() {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-export default withRouter(withStyles(styles)(NarBar));
+  return (
+    <AppBar style={styles.appBar} color="transparent" position="relative">
+      <Toolbar>
+        <Tabs
+          style={styles.tabs}
+          value={location.pathname.slice(1)}
+          onChange={(event, page) => {
+            navigate(`/${page}`);
+          }}
+        >
+          <Tab label="About" value="" />
+          <Tab label="Projects" value="projects" />
+          <Tab label="Contact" value="contact" />
+        </Tabs>
+      </Toolbar>
+    </AppBar>
+  );
+}

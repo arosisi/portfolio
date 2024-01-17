@@ -1,50 +1,45 @@
-import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import GitHub from "@material-ui/icons/GitHub";
 import LinkedIn from "@material-ui/icons/LinkedIn";
-import { withStyles } from "@material-ui/core/styles";
+import React from "react";
 
 const styles = {
   root: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   picture: {
     width: 150,
     height: 150,
     borderRadius: "50%",
-    marginRight: 40
+    marginRight: 40,
   },
   content: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     minHeight: 140,
-    marginTop: 10
+    marginTop: 10,
   },
   name: {
     marginTop: 0,
-    marginBottom: 10
+    marginBottom: 10,
   },
   links: {
     display: "flex",
-    marginTop: 20
+    marginTop: 20,
   },
   link: {
     marginRight: 10,
-    color: "inherit"
-  }
+    color: "inherit",
+  },
 };
 
 class Intro extends React.Component {
   renderIcon = ({ href, icon }) => {
     const { classes } = this.props;
     return (
-      <a
-        href={href}
-        target='_blank'
-        rel='noopener noreferrer'
-        className={classes.link}
-      >
+      <a href={href} target="_blank" rel="noopener noreferrer" className={classes.link}>
         {icon}
       </a>
     );
@@ -54,23 +49,19 @@ class Intro extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <img
-          className={classes.picture}
-          src={`${process.env.PUBLIC_URL}/images/profile-picture.jpg`}
-          alt='Profile'
-        />
+        <img className={classes.picture} src={`${process.env.PUBLIC_URL}/images/profile-picture.jpg`} alt="Profile" />
         <div className={classes.content}>
-          <h2 className={classes.name}>Tom Nguyen</h2>
-          <div>Web developer</div>
+          <strong className={classes.name}>Tom Nguyen</strong>
+          <div>Software developer</div>
           <div>Based in Vancouver, Canada</div>
           <div className={classes.links}>
             {this.renderIcon({
               href: "https://github.com/arosisi",
-              icon: <GitHub fontSize='small' />
+              icon: <GitHub fontSize="small" />,
             })}
             {this.renderIcon({
               href: "https://www.linkedin.com/in/tom-nguyen-76a84922",
-              icon: <LinkedIn />
+              icon: <LinkedIn />,
             })}
           </div>
         </div>
