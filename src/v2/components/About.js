@@ -48,8 +48,8 @@ export default function About() {
       </p>
       <p>So, my professional background (with links to lesser-known entities):</p>
       <ul className="mb-2 list-inside list-disc">
-        <li>Software Development Enginner II at Amazon (Canada) from Jul 2023</li>
-        <li>Software Development Enginner I at Amazon (Canada) from Mar 2021 to Jul 2023</li>
+        <li>Software Development Engineer II at Amazon (Canada) from Jul 2023</li>
+        <li>Software Development Engineer I at Amazon (Canada) from Mar 2021 to Jul 2023</li>
         <li>Software Development Engineer Intern at Amazon (Canada) from Jun to Aug 2020, Sep to Dec 2019</li>
         <li>
           Software Engineer (Co-op) at{" "}
