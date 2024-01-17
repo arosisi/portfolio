@@ -1,37 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { withStyles } from "@material-ui/core/styles";
+import { useLocation, useNavigate } from "react-router-dom";
 
+import NavBar from "../NavBar";
 import Education from "./Education";
 import Experience from "./Experience";
 import Intro from "./Intro";
-import Skills from "./Skills";
 
-const styles = {
-  root: {
-    "& > *": {
-      marginBottom: 50
+export default function About() {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      navigate("/");
     }
-  }
-};
+  }, [pathname, navigate]);
 
-class About extends React.Component {
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.root}>
+  return (
+    <div>
+      <NavBar />
+      <div className="mt-12 flex flex-col gap-8 px-8">
         <Helmet>
           <title>Portfolio</title>
-          <meta name='description' content="arosisi (Tom Nguyen)'s portfolio" />
+          <meta name="description" content="arosisi (Tom Nguyen)'s portfolio" />
         </Helmet>
 
         <Intro />
-        <Skills />
         <Experience />
         <Education />
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-export default withStyles(styles)(About);

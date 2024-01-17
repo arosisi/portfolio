@@ -6,31 +6,37 @@ import TextField from "@material-ui/core/TextField";
 import { ReCaptcha, loadReCaptcha } from "react-recaptcha-google";
 import { withStyles } from "@material-ui/core/styles";
 
+import NavBar from "./NavBar";
 import privateInfo from "../privateInfo";
 
 const styles = {
   root: {
-    maxWidth: 350
+    marginTop: "3rem",
+    display: "flex",
+    justifyContent: "center",
+  },
+  container: {
+    maxWidth: 350,
   },
   inputs: {
     display: "flex",
     flexWrap: "wrap",
     "& > *": {
-      marginBottom: 20
-    }
+      marginBottom: 20,
+    },
   },
   captchaError: {
     color: "#f44336",
-    fontSize: 12
+    fontSize: 12,
   },
   submit: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "end"
+    alignItems: "end",
   },
   submitError: {
-    color: "#f44336"
-  }
+    color: "#f44336",
+  },
 };
 
 class Contact extends React.Component {
@@ -42,14 +48,14 @@ class Contact extends React.Component {
     messageError: false,
     captchaError: false,
     submitting: false,
-    status: ""
+    status: "",
   };
 
   componentDidMount() {
     loadReCaptcha();
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const { captchaLoaded, captchaVerified } = this.state;
@@ -88,100 +94,91 @@ class Contact extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const {
-      nameError,
-      emailError,
-      messageError,
-      captchaError,
-      submitting,
-      status
-    } = this.state;
+    const { nameError, emailError, messageError, captchaError, submitting, status } = this.state;
     return (
-      <div className={classes.root}>
-        <Helmet>
-          <title>Contact</title>
-          <meta name='description' content='Contact arosisi (Tom Nguyen)' />
-        </Helmet>
+      <div>
+        <NavBar />
+        <div className={classes.root}>
+          <Helmet>
+            <title>Contact</title>
+            <meta name="description" content="Contact arosisi (Tom Nguyen)" />
+          </Helmet>
 
-        <form
-          noValidate
-          autoComplete='off'
-          onSubmit={this.handleSubmit}
-          action={privateInfo.form_endpoint}
-          method='POST'
-        >
-          <div className={classes.inputs}>
-            <TextField
-              fullWidth
-              InputLabelProps={{
-                shrink: true
-              }}
-              name='name'
-              label='Name'
-              autoFocus
-              error={nameError}
-              helperText={nameError ? "Name cannot be blank" : ""}
-              onChange={() => this.setState({ nameError: false, status: "" })}
-            />
-            <TextField
-              fullWidth
-              InputLabelProps={{
-                shrink: true
-              }}
-              name='email'
-              label='Email'
-              error={emailError}
-              helperText={emailError ? "Invalid email format" : ""}
-              onChange={() => this.setState({ emailError: false, status: "" })}
-            />
-            <TextField
-              fullWidth
-              multiline
-              rows={4}
-              InputLabelProps={{
-                shrink: true
-              }}
-              name='message'
-              label='Message'
-              error={messageError}
-              helperText={messageError ? "Message cannot be blank" : ""}
-              onChange={() =>
-                this.setState({ messageError: false, status: "" })
-              }
-            />
+          <div className={classes.container}>
+            <form
+              className={classes.container}
+              noValidate
+              autoComplete="off"
+              onSubmit={this.handleSubmit}
+              action={privateInfo.form_endpoint}
+              method="POST"
+            >
+              <div className={classes.inputs}>
+                <TextField
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="name"
+                  label="Name"
+                  autoFocus
+                  error={nameError}
+                  helperText={nameError ? "Name cannot be blank" : ""}
+                  onChange={() => this.setState({ nameError: false, status: "" })}
+                />
+                <TextField
+                  fullWidth
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="email"
+                  label="Email"
+                  error={emailError}
+                  helperText={emailError ? "Invalid email format" : ""}
+                  onChange={() => this.setState({ emailError: false, status: "" })}
+                />
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={4}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="message"
+                  label="Message"
+                  error={messageError}
+                  helperText={messageError ? "Message cannot be blank" : ""}
+                  onChange={() => this.setState({ messageError: false, status: "" })}
+                />
+              </div>
+
+              <ReCaptcha
+                ref={(element) => {
+                  this.captcha = element;
+                }}
+                render="explicit"
+                sitekey={privateInfo.captcha_sitekey}
+                onloadCallback={() => this.setState({ captchaLoaded: true })}
+                verifyCallback={() => this.setState({ captchaVerified: true, captchaError: false })}
+                expiredCallback={() => this.setState({ captchaVerified: false })}
+              />
+              {captchaError && <div className={classes.captchaError}>Captcha is required</div>}
+
+              <br />
+
+              <div className={classes.submit}>
+                {status === "SUCCESS" ? (
+                  <p>Submitted!</p>
+                ) : submitting ? (
+                  <CircularProgress />
+                ) : (
+                  <Button type="submit">Submit</Button>
+                )}
+                {status === "ERROR" && <p className={classes.submitError}>Ooops! There was an error.</p>}
+              </div>
+            </form>
           </div>
-
-          <ReCaptcha
-            ref={element => {
-              this.captcha = element;
-            }}
-            render='explicit'
-            sitekey={privateInfo.captcha_sitekey}
-            onloadCallback={() => this.setState({ captchaLoaded: true })}
-            verifyCallback={() =>
-              this.setState({ captchaVerified: true, captchaError: false })
-            }
-            expiredCallback={() => this.setState({ captchaVerified: false })}
-          />
-          {captchaError && (
-            <div className={classes.captchaError}>Captcha is required</div>
-          )}
-
-          <br />
-
-          <div className={classes.submit}>
-            {status === "SUCCESS" ? (
-              <p>Submitted!</p>
-            ) : submitting ? (
-              <CircularProgress />
-            ) : (
-              <Button type='submit'>Submit</Button>
-            )}
-            {status === "ERROR" && (
-              <p className={classes.submitError}>Ooops! There was an error.</p>
-            )}
-          </div>
-        </form>
+        </div>
       </div>
     );
   }

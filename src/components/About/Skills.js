@@ -1,10 +1,10 @@
-import React from "react";
 import { withStyles } from "@material-ui/core/styles";
+import React from "react";
 
 const styles = {
   category: {
-    marginBottom: 5
-  }
+    marginBottom: 5,
+  },
 };
 
 class Skills extends React.Component {
