@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ReCaptcha, loadReCaptcha } from "react-recaptcha-google";
+import React, { useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import privateInfo from "../../privateInfo";
 import Nav from "./Nav";
@@ -15,10 +15,6 @@ export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState(null);
 
   const captchaRef = useRef();
-
-  useEffect(() => {
-    loadReCaptcha();
-  }, []);
 
   const validateEmail = () => {
     const emailInvalid = !!email && !new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", "g").test(email);
@@ -86,13 +82,12 @@ export default function Contact() {
           />
         </div>
 
-        <ReCaptcha
+        <ReCAPTCHA
           ref={captchaRef}
-          render="explicit"
           sitekey={privateInfo.captcha_sitekey}
-          onloadCallback={() => setCaptchaLoaded(true)}
-          verifyCallback={() => setCaptchaVerified(true)}
-          expiredCallback={() => setCaptchaVerified(false)}
+          asyncScriptOnLoad={() => setCaptchaLoaded(true)}
+          onChange={() => setCaptchaVerified(true)}
+          onExpired={() => setCaptchaVerified(false)}
         />
 
         <div className="mr-2 self-end">

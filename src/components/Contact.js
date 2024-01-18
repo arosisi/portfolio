@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import TextField from "@material-ui/core/TextField";
-import { ReCaptcha, loadReCaptcha } from "react-recaptcha-google";
 import { withStyles } from "@material-ui/core/styles";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import NavBar from "./NavBar";
 import privateInfo from "../privateInfo";
@@ -50,10 +50,6 @@ class Contact extends React.Component {
     submitting: false,
     status: "",
   };
-
-  componentDidMount() {
-    loadReCaptcha();
-  }
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -152,15 +148,14 @@ class Contact extends React.Component {
                 />
               </div>
 
-              <ReCaptcha
+              <ReCAPTCHA
                 ref={(element) => {
                   this.captcha = element;
                 }}
-                render="explicit"
                 sitekey={privateInfo.captcha_sitekey}
-                onloadCallback={() => this.setState({ captchaLoaded: true })}
-                verifyCallback={() => this.setState({ captchaVerified: true, captchaError: false })}
-                expiredCallback={() => this.setState({ captchaVerified: false })}
+                asyncScriptOnLoad={() => this.setState({ captchaLoaded: true })}
+                onChange={() => this.setState({ captchaVerified: true, captchaError: false })}
+                onExpired={() => this.setState({ captchaVerified: false })}
               />
               {captchaError && <div className={classes.captchaError}>Captcha is required</div>}
 
