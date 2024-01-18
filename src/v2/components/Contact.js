@@ -30,9 +30,11 @@ export default function Contact() {
       setIsSubmitting(true);
       setSubmitStatus(null);
 
+      const captchaResponseEl = document.getElementById("g-recaptcha-response");
+
       const response = await fetch(privateInfo.form_endpoint, {
         method: "POST",
-        body: JSON.stringify({ email, message }),
+        body: JSON.stringify({ email, message, "g-recaptcha-response": captchaResponseEl.value }),
         headers: {
           Accept: "application/json",
         },
@@ -40,12 +42,13 @@ export default function Contact() {
       if (response.ok) {
         setEmail("");
         setMessage("");
-        setSubmitStatus("Submission succeeded!");
+        captchaRef.current.reset();
+        setSubmitStatus({ message: "Submission succeeded!" });
       } else {
         throw new Error((await response.json()).error || "Unknown error from FormSpree!");
       }
     } catch (error) {
-      setSubmitStatus(`${error.name}: ${error.message}`);
+      setSubmitStatus({ errored: true, message: `${error.name}: ${error.message}` });
     } finally {
       setIsSubmitting(false);
     }
@@ -68,7 +71,7 @@ export default function Contact() {
               onBlur={validateEmail}
               className="px-2"
             />
-            {emailInvalid && <p>Common, give me a proper-looking email!</p>}
+            {emailInvalid && <p className="text-red-600">Common, give me a proper-looking email!</p>}
           </div>
         </div>
 
@@ -93,9 +96,16 @@ export default function Contact() {
         />
 
         <div className="mr-2 self-end">
-          <Button text="Submit" disabled={!email || emailInvalid || !message || isSubmitting} onClick={submit} />
+          <Button
+            text="Submit"
+            disabled={!email || emailInvalid || !message || !captchaLoaded || !captchaVerified || isSubmitting}
+            onClick={submit}
+          />
         </div>
-        {submitStatus && <p>{submitStatus}</p>}
+        {isSubmitting && <p>Submitting...</p>}
+        {submitStatus && (
+          <p className={submitStatus.errored ? "text-red-600" : "text-green-600"}>{submitStatus.message}</p>
+        )}
       </div>
     </div>
   );
