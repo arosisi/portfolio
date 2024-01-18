@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { ReCaptcha, loadReCaptcha } from "react-recaptcha-google";
 
 import privateInfo from "../../privateInfo";
 import Nav from "./Nav";
@@ -8,8 +9,16 @@ export default function Contact() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [emailInvalid, setEmailInvalid] = useState(false);
+  const [captchaLoaded, setCaptchaLoaded] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+
+  const captchaRef = useRef();
+
+  useEffect(() => {
+    loadReCaptcha();
+  }, []);
 
   const validateEmail = () => {
     const emailInvalid = !!email && !new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", "g").test(email);
@@ -46,18 +55,21 @@ export default function Contact() {
     <div className="container mb-8 px-8 font-typewriter">
       <Nav />
       <div className="container mx-auto flex max-w-96 flex-col space-y-4">
-        <div className="flex flex-col">
+        <div>
           <label htmlFor="email">Email*</label>
-          <input
-            type="email"
-            id="email"
-            autoComplete="off"
-            autoFocus
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            onBlur={validateEmail}
-            className="px-2"
-          />
+          <div className="flex flex-col space-y-2">
+            <input
+              type="email"
+              id="email"
+              autoComplete="off"
+              autoFocus
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              onBlur={validateEmail}
+              className="px-2"
+            />
+            {emailInvalid && <p>Common, give me a proper-looking email!</p>}
+          </div>
         </div>
 
         <div className="flex flex-col">
@@ -71,11 +83,22 @@ export default function Contact() {
           />
         </div>
 
-        <div className="mr-2 self-end">
-          <Button text="Submit" disabled={!email || emailInvalid || !message || isSubmitting} onClick={submit} />
-        </div>
+        <ReCaptcha
+          ref={captchaRef}
+          render="explicit"
+          sitekey={privateInfo.captcha_sitekey}
+          onloadCallback={() => setCaptchaLoaded(true)}
+          verifyCallback={() => setCaptchaVerified(true)}
+          expiredCallback={() => setCaptchaVerified(false)}
+        />
 
-        {emailInvalid && <p>Common, give me a proper-looking email!</p>}
+        <div className="mr-2 self-end">
+          <Button
+            text="Submit"
+            disabled={!email || emailInvalid || !message || !captchaLoaded || !captchaVerified || isSubmitting}
+            onClick={submit}
+          />
+        </div>
         {submitStatus && <p>{submitStatus}</p>}
       </div>
     </div>
