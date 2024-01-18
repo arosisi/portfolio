@@ -1,30 +1,18 @@
 import React from "react";
 
+import Link from "../common/Link";
+
 function ArcadeGame() {
   return (
     <div>
       <li className="mb-2">
-        <a
-          href="https://arosisi.github.io/arcade-game"
-          target="_blank"
-          rel="noreferrer"
-          className="text-blue-700 hover:underline"
-        >
-          A random arcade game
-        </a>
+        <Link href="https://arosisi.github.io/arcade-game" text="A random arcade game" />
       </li>
       <p className="mb-2 ml-8">
         A simple but pretty interesting arcade game I saw at{" "}
-        <a
-          href="https://theamazingbrentwood.com/store/the-rec-room"
-          target="_blank"
-          rel="noreferrer"
-          className="text-blue-700 hover:underline"
-        >
-          The Rec Room
-        </a>
-        . I could not find anything about the game on the Internet, so no pictures or links. It'll also be just too
-        wordy to try to explain it. The game itself should be self-explanatory when you play it.
+        <Link href="https://theamazingbrentwood.com/store/the-rec-room" text="The Rec Room" />. I could not find
+        anything about the game on the Internet, so no pictures or links. It'll also be just too wordy to try to explain
+        it. The game itself should be self-explanatory when you play it.
       </p>
     </div>
   );
@@ -34,14 +22,7 @@ function TowerOfHanoi() {
   return (
     <div>
       <li className="mb-2">
-        <a
-          href="https://arosisi.github.io/tower-of-hanoi"
-          target="_blank"
-          rel="noreferrer"
-          className="text-blue-700 hover:underline"
-        >
-          Tower of Hanoi
-        </a>
+        <Link href="https://arosisi.github.io/tower-of-hanoi" text="Tower of Hanoi" />
       </li>
       <p className="ml-8">
         A mathematical puzzle where there are three rods and a stack of disks of different diameters, which can slide
@@ -62,17 +43,9 @@ function TowerOfHanoi() {
         />
       </div>
       <p className="ml-8">
-        Some interesting facts on{" "}
-        <a
-          href="https://en.wikipedia.org/wiki/Tower_of_Hanoi"
-          target="_blank"
-          rel="noreferrer"
-          className="text-blue-700 hover:underline"
-        >
-          Wikipedia
-        </a>{" "}
-        about the puzzle: It was invented by a French mathematician in 1883 and a game played with 64 disks can take
-        roughly 585 billion years to finish.
+        Some interesting facts on <Link href="https://en.wikipedia.org/wiki/Tower_of_Hanoi" text="Wikipedia" /> about
+        the puzzle: It was invented by a French mathematician in 1883 and a game played with 64 disks can take roughly
+        585 billion years to finish.
       </p>
     </div>
   );
