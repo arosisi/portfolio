@@ -51,7 +51,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="container mb-8 px-8 font-typewriter">
+    <div className="container mb-8 max-w-4xl px-8 font-typewriter">
       <Nav />
       <div className="container mx-auto flex max-w-96 flex-col space-y-4">
         <div>

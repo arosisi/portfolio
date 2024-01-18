@@ -15,7 +15,7 @@ export default function About() {
   }, [pathname, navigate]);
 
   return (
-    <div className="container mb-8 px-8 font-typewriter">
+    <div className="container mb-8 max-w-4xl px-8 font-typewriter">
       <Nav />
       <p className="mb-4">Hello there!</p>
       <p className="mb-2">

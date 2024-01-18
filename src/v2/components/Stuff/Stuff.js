@@ -6,7 +6,7 @@ import Writings from "./Writings";
 
 export default function Stuff() {
   return (
-    <div className="container mb-8 px-8 font-typewriter">
+    <div className="container mb-8 max-w-4xl px-8 font-typewriter">
       <Nav />
       <div className="space-y-8">
         <WebApps />
