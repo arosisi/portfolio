@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import Nav from "./Nav";
@@ -16,7 +17,13 @@ export default function About() {
 
   return (
     <div className="container mb-8 max-w-4xl px-8 font-typewriter">
+      <Helmet>
+        <title>About</title>
+        <meta name="description" content="About arosisi (Tom Nguyen)" />
+      </Helmet>
+
       <Nav />
+
       <p className="mb-4">Hello there!</p>
       <p className="mb-2">
         Welcome to my little space on the Internet, where I keep my <Link pathname="/v2/stuff" text="digital stuff" />.

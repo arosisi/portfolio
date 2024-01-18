@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Helmet } from "react-helmet";
 
 import privateInfo from "../../privateInfo";
 import Nav from "./Nav";
@@ -52,7 +53,13 @@ export default function Contact() {
 
   return (
     <div className="container mb-8 max-w-4xl px-8 font-typewriter">
+      <Helmet>
+        <title>Contact</title>
+        <meta name="description" content="Contact arosisi (Tom Nguyen)" />
+      </Helmet>
+
       <Nav />
+
       <div className="container mx-auto flex max-w-96 flex-col space-y-4">
         <div>
           <label htmlFor="email">Email*</label>
