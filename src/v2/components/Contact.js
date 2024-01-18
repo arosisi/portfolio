@@ -32,7 +32,7 @@ export default function Contact() {
 
       const response = await fetch(privateInfo.form_endpoint, {
         method: "POST",
-        body: { email, message },
+        body: JSON.stringify({ email, message }),
         headers: {
           Accept: "application/json",
         },
@@ -93,11 +93,7 @@ export default function Contact() {
         />
 
         <div className="mr-2 self-end">
-          <Button
-            text="Submit"
-            disabled={!email || emailInvalid || !message || !captchaLoaded || !captchaVerified || isSubmitting}
-            onClick={submit}
-          />
+          <Button text="Submit" disabled={!email || emailInvalid || !message || isSubmitting} onClick={submit} />
         </div>
         {submitStatus && <p>{submitStatus}</p>}
       </div>
