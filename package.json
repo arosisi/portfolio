@@ -47,7 +47,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/runtime": "^7.23.8",
-    "gh-pages": "^2.2.0",
+    "gh-pages": "^5.0.0",
     "prettier": "^3.2.2",
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.11",
