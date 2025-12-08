@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Helmet } from "react-helmet";
 
-import privateInfo from "../../privateInfo";
+import config from "../../config";
 import Nav from "./Nav";
 import Button from "./common/Button";
 
@@ -29,7 +29,7 @@ export default function Contact() {
 
       const captchaResponseEl = document.getElementById("g-recaptcha-response");
 
-      const response = await fetch(privateInfo.form_endpoint, {
+      const response = await fetch(config.form_endpoint, {
         method: "POST",
         body: JSON.stringify({ email, message, "g-recaptcha-response": captchaResponseEl.value }),
         headers: {
@@ -91,7 +91,7 @@ export default function Contact() {
 
         <ReCAPTCHA
           ref={captchaRef}
-          sitekey={privateInfo.captcha_sitekey}
+          sitekey={config.captcha_sitekey}
           asyncScriptOnLoad={() => setCaptchaLoaded(true)}
           onChange={() => setCaptchaVerified(true)}
           onExpired={() => setCaptchaVerified(false)}

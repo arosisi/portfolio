@@ -7,7 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import NavBar from "./NavBar";
-import privateInfo from "../privateInfo";
+import config from "../config";
 
 const styles = {
   root: {
@@ -106,7 +106,7 @@ class Contact extends React.Component {
               noValidate
               autoComplete="off"
               onSubmit={this.handleSubmit}
-              action={privateInfo.form_endpoint}
+              action={config.form_endpoint}
               method="POST"
             >
               <div className={classes.inputs}>
@@ -152,7 +152,7 @@ class Contact extends React.Component {
                 ref={(element) => {
                   this.captcha = element;
                 }}
-                sitekey={privateInfo.captcha_sitekey}
+                sitekey={config.captcha_sitekey}
                 asyncScriptOnLoad={() => this.setState({ captchaLoaded: true })}
                 onChange={() => this.setState({ captchaVerified: true, captchaError: false })}
                 onExpired={() => this.setState({ captchaVerified: false })}
