@@ -30,7 +30,7 @@ export default function About() {
       </p>
       <p className="mb-2">
         If you're here from <Link href="https://github.com/arosisi" text="GitHub" /> or{" "}
-        <Link href="https://www.linkedin.com/in/tom-nguyen-76a84922" text="LinkedIn" />, I'm getting noticed and you
+        <Link href="https://www.linkedin.com/in/tom-trinh-nguyen" text="LinkedIn" />, I'm getting noticed and you
         probably know a little bit about myself. If not (how did you find me?), I'm Tom Nguyen, a software developer at
         Amazon based in Vancouver Canada.
       </p>

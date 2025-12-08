@@ -27,14 +27,6 @@ function ArcadeGame() {
       <p className="ml-8">
         I tried to code the game when I got back home from the arcade place. It was originally put on{" "}
         <Link href="https://b275gu.csb.app" text="codesandbox" /> and only recently ported over to GitHub.
-        Interestingly, there's a bug that shows up only in the GitHub version (with NextJs and the latest of everything)
-        which I only have a workaround for now (
-        <Link
-          href="https://github.com/arosisi/arcade-game/commit/c5652d88ccac213683289a12f08113f080b7f756"
-          text="commit"
-        />
-        ). If for some reason, you read until here and even go and look at the bug, I'd appreciate any insights or
-        pointers.
       </p>
     </div>
   );

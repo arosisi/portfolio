@@ -60,7 +60,7 @@ class Intro extends React.Component {
               icon: <GitHub fontSize="small" />,
             })}
             {this.renderIcon({
-              href: "https://www.linkedin.com/in/tom-nguyen-76a84922",
+              href: "https://www.linkedin.com/in/tom-trinh-nguyen",
               icon: <LinkedIn />,
             })}
           </div>
