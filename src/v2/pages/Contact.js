@@ -3,8 +3,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Helmet } from "react-helmet";
 
 import config from "../../config";
-import Nav from "./Nav";
-import Button from "./common/Button";
+import Nav from "../components/Nav";
+import Button from "../components/common/Button";
 
 export default function Contact() {
   const [email, setEmail] = useState("");

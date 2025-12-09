@@ -1,9 +1,9 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import TextField from "@material-ui/core/TextField";
-import { withStyles } from "@material-ui/core/styles";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
+import { withStyles } from "@mui/styles";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import NavBar from "./NavBar";
@@ -121,6 +121,7 @@ class Contact extends React.Component {
                   error={nameError}
                   helperText={nameError ? "Name cannot be blank" : ""}
                   onChange={() => this.setState({ nameError: false, status: "" })}
+                  sx={{ marginBottom: 2.5 }}
                 />
                 <TextField
                   fullWidth
@@ -132,6 +133,7 @@ class Contact extends React.Component {
                   error={emailError}
                   helperText={emailError ? "Invalid email format" : ""}
                   onChange={() => this.setState({ emailError: false, status: "" })}
+                  sx={{ marginBottom: 2.5 }}
                 />
                 <TextField
                   fullWidth
@@ -145,6 +147,7 @@ class Contact extends React.Component {
                   error={messageError}
                   helperText={messageError ? "Message cannot be blank" : ""}
                   onChange={() => this.setState({ messageError: false, status: "" })}
+                  sx={{ marginBottom: 2.5 }}
                 />
               </div>
 

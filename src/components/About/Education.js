@@ -1,5 +1,5 @@
-import Card from "@material-ui/core/Card";
-import { withStyles } from "@material-ui/core/styles";
+import Card from "@mui/material/Card";
+import { withStyles } from "@mui/styles";
 import React from "react";
 
 const styles = {

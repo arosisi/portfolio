@@ -1,41 +1,38 @@
-import { withStyles } from "@material-ui/core/styles";
+import { styled } from "@mui/material/styles";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Projects from "./components/Projects";
-import AboutV2 from "./v2/components/About";
-import ContactV2 from "./v2/components/Contact";
-import Stuff from "./v2/components/Stuff";
+import AboutV2 from "./v2/pages/About";
+import ContactV2 from "./v2/pages/Contact";
+import ProjectsV2 from "./v2/pages/Projects";
+import Writings from "./v2/pages/Writings";
 
-const styles = {
-  content: {
-    display: "flex",
-    justifyContent: "center",
-  },
-};
+const ContentDiv = styled("div")({
+  display: "flex",
+  justifyContent: "center",
+});
 
-class App extends React.Component {
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.content}>
-        <Routes>
-          <Route exact path="/" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
+function App() {
+  return (
+    <ContentDiv>
+      <Routes>
+        <Route exact path="/" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/contact" element={<Contact />} />
 
-          <Route path="/v2" element={<AboutV2 />} />
-          <Route path="/v2/stuff" element={<Stuff />} />
-          <Route path="/v2/contact" element={<ContactV2 />} />
+        <Route path="/v2" element={<AboutV2 />} />
+        <Route path="/v2/projects" element={<ProjectsV2 />} />
+        <Route path="/v2/writings" element={<Writings />} />
+        <Route path="/v2/contact" element={<ContactV2 />} />
 
-          <Route path="/v2/*" element={<AboutV2 />} />
-          <Route path="/*" element={<About />} />
-        </Routes>
-      </div>
-    );
-  }
+        <Route path="/v2/*" element={<AboutV2 />} />
+        <Route path="/*" element={<About />} />
+      </Routes>
+    </ContentDiv>
+  );
 }
 
-export default withStyles(styles)(App);
+export default App;

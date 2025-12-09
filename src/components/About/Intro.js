@@ -1,6 +1,6 @@
-import { withStyles } from "@material-ui/core/styles";
-import GitHub from "@material-ui/icons/GitHub";
-import LinkedIn from "@material-ui/icons/LinkedIn";
+import { withStyles } from "@mui/styles";
+import GitHub from "@mui/icons-material/GitHub";
+import LinkedIn from "@mui/icons-material/LinkedIn";
 import React from "react";
 
 const styles = {

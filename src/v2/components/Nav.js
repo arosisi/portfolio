@@ -21,7 +21,8 @@ export default function Nav() {
   return (
     <div className="my-8 flex justify-end">
       <NavItem pathname="/v2" text="About" />
-      <NavItem pathname="/v2/stuff" text="Stuff" />
+      <NavItem pathname="/v2/projects" text="Projects" />
+      <NavItem pathname="/v2/writings" text="Writings" />
       <NavItem pathname="/v2/contact" text="Contact" />
     </div>
   );
